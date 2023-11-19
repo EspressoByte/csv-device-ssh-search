@@ -1,8 +1,30 @@
 #!/usr/bin/python3
 import os
 import csv
+import getpass
+
+#collect current user logged into system
+def get_current_username():
+    try:
+        # Use getpass to get the current username
+        username = getpass.getuser()
+        return username
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+
+# Get the current username and store it in a variable
+current_username = get_current_username()
+
+# Check if the username retrieval was successful
+if current_username:
+    print(f"Current user: {current_username}")
+else:
+    print("Unable to determine the current username.")
+    exit_program()
+
 userTags=""
-username=""
+username=current_username
 
 while userTags != "exit" and userTags != "q" and userTags != "quit":
     connect=[]
