@@ -2,12 +2,14 @@
 import os
 import csv
 userTags=""
+username=""
 
 while userTags != "exit" and userTags != "q" and userTags != "quit":
     connect=[]
     userTags=input("Enter search tags: ")
     tags=userTags.split(",")
     tags=[x.strip().lower() for x in tags]
+#    print(tags)
     if tags[0] == "detailed":
         searchResults="detailed"
         tags.pop(0)
@@ -22,13 +24,13 @@ while userTags != "exit" and userTags != "q" and userTags != "quit":
             if searchResults == "basic":
                 print(device[0], "-",device[1])
                 connect.append(device[1])
+                #os.system(f"ssh {}username@{device[1]}")
             elif searchResults == "detailed":
                 connect.append(device[1])
                 print(device)
     if len(connect) == 1:
-        os.system(f"ssh admin@{connect[0]}")
+        os.system(f"ssh {username}@{connect[0]}")
 
 else:
     os.system("clear")
     print("Exiting search program!")
-
