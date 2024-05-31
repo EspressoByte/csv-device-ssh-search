@@ -19,7 +19,7 @@ current_username = get_current_username()
 
 # Check if the username retrieval was successful
 if current_username:
-    print(f"Current user: {current_username}")
+    print(f"Current username: {current_username}")
 else:
     print("Unable to determine the current username.")
     exit_program()
@@ -43,9 +43,9 @@ def main():
 
     while True:
         # Get user input and split it by commas
-        user_input = input("Enter patterns separated by commas (type 'exit' to quit): ")
+        user_input = input("Enter search: ")
         
-        if user_input.lower() == 'exit':
+        if user_input.lower() == 'exit' or user_input.lower() == 'quit':
             break
 
         patterns = user_input.split(',')
@@ -58,11 +58,13 @@ def main():
 
         # Output the matching lines
         if matching_lines:
-            print("Matching lines:")
+            print("Matching Devices:")
             for match in matching_lines:
-                print(match)
+                match=match.split(',')
+                print(match[0], "-", match[2], "-", match[1])
             if len(matching_lines) == 1:
-                os.system(f"ssh {current_username}@{matching_lines[0]}")
+                print("CONNECTING...", match[1])
+                os.system(f"ssh {current_username}@{match[1]}")
         else:
             print("No matching lines found.")
 
